@@ -1,0 +1,11 @@
+{
+  "replace": "false",
+  "values": [
+    "glasses:beach_glasses",
+    "glasses:detective_glasses",
+    "glasses:monocle",
+    "glasses:sunglasses_style1",
+    "glasses:sunglasses_style2",
+    "glasses:tactical_goggles"
+  ]
+}
