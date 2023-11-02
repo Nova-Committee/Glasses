@@ -23,4 +23,9 @@ public class GlassesItemCurios extends GlassesItem implements ICurioItem {
     public ICurio.SoundInfo getEquipSound(SlotContext slotContext, ItemStack stack) {
         return new ICurio.SoundInfo(SoundEvents.ARMOR_EQUIP_GOLD, .8F, .8F + (float) Math.random() * .2F);
     }
+
+    @Override
+    public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
+        return true;
+    }
 }

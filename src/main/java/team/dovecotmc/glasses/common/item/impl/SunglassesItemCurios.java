@@ -21,6 +21,11 @@ public class SunglassesItemCurios extends SunglassesItem implements ICurioItem {
     }
 
     @Override
+    public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean isEnderMask(SlotContext slotContext, EnderMan enderMan, ItemStack stack) {
         return true;
     }
