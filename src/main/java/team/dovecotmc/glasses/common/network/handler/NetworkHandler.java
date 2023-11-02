@@ -5,7 +5,7 @@ import net.minecraftforge.network.Channel;
 import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.SimpleChannel;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.common.network.msg.MonocularUseMessage;
+import team.dovecotmc.glasses.common.network.msg.GlassesUseMessage;
 
 public class NetworkHandler {
     public static SimpleChannel INSTANCE;
@@ -21,10 +21,10 @@ public class NetworkHandler {
                 .acceptedVersions(Channel.VersionTest.exact(1))
                 .networkProtocolVersion(1)
                 .simpleChannel();
-        INSTANCE.messageBuilder(MonocularUseMessage.class, nextId())
-                .encoder(MonocularUseMessage::toBytes)
-                .decoder(MonocularUseMessage::new)
-                .consumerMainThread(MonocularUseMessage::handler)
+        INSTANCE.messageBuilder(GlassesUseMessage.class, nextId())
+                .encoder(GlassesUseMessage::toBytes)
+                .decoder(GlassesUseMessage::new)
+                .consumerMainThread(GlassesUseMessage::handler)
                 .add();
     }
 }

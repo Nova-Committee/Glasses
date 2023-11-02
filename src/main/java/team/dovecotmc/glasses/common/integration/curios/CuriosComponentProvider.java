@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import team.dovecotmc.glasses.common.item.base.GlassesItemCurios;
 import team.dovecotmc.glasses.common.item.impl.SunglassesItemCurios;
+import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.Optional;
@@ -19,6 +20,14 @@ public class CuriosComponentProvider {
 
     public static Supplier<Item> sunGlasses(Component artisan) {
         return () -> new SunglassesItemCurios(artisan);
+    }
+
+    public static Supplier<Item> commonGlasses(Component artisan, GlassesProperties properties) {
+        return () -> new GlassesItemCurios(artisan, properties);
+    }
+
+    public static Supplier<Item> sunGlasses(Component artisan, GlassesProperties properties) {
+        return () -> new SunglassesItemCurios(artisan, properties);
     }
 
     public static boolean isWearingOnCuriosSlot(LivingEntity entity, Predicate<ItemStack> filter) {

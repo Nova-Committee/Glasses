@@ -11,5 +11,6 @@
   "item.glasses.tactical_goggles_style1": "战术目镜（样式1）",
   "itemGroup.glasses.glasses": "眼镜",
   "tooltips.glasses.artisan": "工匠：%s",
-  "tooltips.glasses.blocks_endermen": "这副眼镜可以防止末影人在被你直视时发怒"
+  "tooltips.glasses.blocks_endermen": "这副眼镜可以防止末影人在被你直视时发怒",
+  "tooltips.glasses.monocular.use": "按“%s”使用单筒望远镜。"
 }

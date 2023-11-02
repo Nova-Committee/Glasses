@@ -7,13 +7,18 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public class SunglassesItemCurios extends SunglassesItem implements ICurioItem {
+    public SunglassesItemCurios(Component artisan, GlassesProperties properties) {
+        super(artisan, properties);
+    }
+
     public SunglassesItemCurios(Component artisan) {
-        super(artisan);
+        this(artisan, GlassesProperties.builder().build());
     }
 
     @Override

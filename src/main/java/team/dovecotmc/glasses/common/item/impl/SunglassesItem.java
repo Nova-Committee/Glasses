@@ -9,12 +9,17 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
+import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
 
 import java.util.List;
 
 public class SunglassesItem extends GlassesItem {
+    public SunglassesItem(Component artisan, GlassesProperties properties) {
+        super(artisan, properties);
+    }
+
     public SunglassesItem(Component artisan) {
-        super(artisan);
+        this(artisan, GlassesProperties.builder().build());
     }
 
     @Override

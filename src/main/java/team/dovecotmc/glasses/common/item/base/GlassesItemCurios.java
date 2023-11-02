@@ -6,18 +6,18 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 public class GlassesItemCurios extends GlassesItem implements ICurioItem {
-
-    public GlassesItemCurios(Component artisan, Properties properties) {
+    public GlassesItemCurios(Component artisan, GlassesProperties properties) {
         super(artisan, properties);
     }
 
     public GlassesItemCurios(Component artisan) {
-        this(artisan, new Properties());
+        this(artisan, GlassesProperties.builder().build());
     }
 
     @Override
