@@ -14,12 +14,12 @@ import java.util.Locale;
 import java.util.function.Supplier;
 
 public enum ItemRef implements Supplier<Item> {
-    BEACH_GLASSES(sunGlasses(Artisans.GREYGOD)),
+    BEACH_GLASSES_STYLE1(sunGlasses(Artisans.GREYGOD)),
     DETECTIVE_GLASSES(commonGlasses(Artisans.GREYGOD)),
-    MONOCLE(commonGlasses(Artisans.GREYGOD)),
+    MONOCLE_STYLE1(commonGlasses(Artisans.GREYGOD)),
     SUNGLASSES_STYLE1(sunGlasses(Artisans.TAPIO)),
     SUNGLASSES_STYLE2(sunGlasses(Artisans.GREYGOD)),
-    TACTICAL_GOGGLES(sunGlasses(Artisans.GREYGOD));
+    TACTICAL_GOGGLES_STYLE1(sunGlasses(Artisans.GREYGOD));
 
     ItemRef(Supplier<Item> sup) {
         this.reg = RegistryHandler.ITEMS.register(this.name().toLowerCase(Locale.ROOT), sup);
