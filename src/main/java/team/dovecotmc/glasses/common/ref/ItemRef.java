@@ -6,7 +6,7 @@ import net.minecraftforge.registries.RegistryObject;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.common.info.Artisans;
 import team.dovecotmc.glasses.common.init.RegistryHandler;
-import team.dovecotmc.glasses.common.integration.curios.CuriosItemProvider;
+import team.dovecotmc.glasses.common.integration.curios.CuriosComponentProvider;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
 import team.dovecotmc.glasses.common.item.impl.SunglassesItem;
 
@@ -17,6 +17,7 @@ public enum ItemRef implements Supplier<Item> {
     BEACH_GLASSES_STYLE1(sunGlasses(Artisans.GREYGOD)),
     DETECTIVE_GLASSES(commonGlasses(Artisans.GREYGOD)),
     MONOCLE_STYLE1(commonGlasses(Artisans.GREYGOD)),
+    MONOCULAR(commonGlasses(Artisans.GREYGOD)),
     SUNGLASSES_STYLE1(sunGlasses(Artisans.TAPIO)),
     SUNGLASSES_STYLE2(sunGlasses(Artisans.GREYGOD)),
     TACTICAL_GOGGLES_STYLE1(sunGlasses(Artisans.GREYGOD));
@@ -36,10 +37,10 @@ public enum ItemRef implements Supplier<Item> {
     }
 
     private static Supplier<Item> commonGlasses(Component artisan) {
-        return Glasses.isCuriosLoaded() ? CuriosItemProvider.commonGlasses(artisan) : () -> new GlassesItem(artisan);
+        return Glasses.isCuriosLoaded() ? CuriosComponentProvider.commonGlasses(artisan) : () -> new GlassesItem(artisan);
     }
 
     private static Supplier<Item> sunGlasses(Component artisan) {
-        return Glasses.isCuriosLoaded() ? CuriosItemProvider.sunGlasses(artisan) : () -> new SunglassesItem(artisan);
+        return Glasses.isCuriosLoaded() ? CuriosComponentProvider.sunGlasses(artisan) : () -> new SunglassesItem(artisan);
     }
 }

@@ -2,9 +2,11 @@ package team.dovecotmc.glasses.common.item.impl;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -12,6 +14,11 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 public class SunglassesItemCurios extends SunglassesItem implements ICurioItem {
     public SunglassesItemCurios(Component artisan) {
         super(artisan);
+    }
+
+    @Override
+    public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
+        return null;
     }
 
     @NotNull
