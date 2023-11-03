@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record GlassesProperties(
-        Item.Properties properties, Supplier<TooltipProvider> tooltipProvider, PacketAction packetAction) {
+        Item.Properties properties, Supplier<TooltipProvider> tooltipProvider, @Nullable PacketAction packetAction) {
     public static Builder builder() {
         return new Builder();
     }
@@ -29,7 +29,7 @@ public record GlassesProperties(
         private Item.Properties properties = new Item.Properties();
         private Supplier<TooltipProvider> tooltipProvider = () -> (s, l, t, f) -> {
         };
-        private PacketAction packetAction = null;
+        private @Nullable PacketAction packetAction = null;
 
         public Builder properties(Item.Properties properties) {
             this.properties = properties;
