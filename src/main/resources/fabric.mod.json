@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "glasses",
+  "version": "${version}",
+  "name": "glasses",
+  "description": "Add various glasses to Minecraft!",
+  "authors": [
+    "Tapio"
+  ],
+  "contributors": [
+    "Greygod"
+  ],
+  "contact": {
+    "sources": "https://github.com/Nova-Committee/Glasses"
+  },
+  "license": "Nova-Relay-License-1.0",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "team.dovecotmc.glasses.client.GlassesClient"
+    ],
+    "main": [
+      "team.dovecotmc.glasses.Glasses"
+    ]
+  },
+  "mixins": [
+    "glasses.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "*"
+  }
+}

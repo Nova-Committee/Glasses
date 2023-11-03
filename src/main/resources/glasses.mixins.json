@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "team.dovecotmc.glasses.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "common.MixinEnderMan",
+    "common.MixinLivingEntity",
+    "common.MixinPlayerList"
+  ],
+  "client": [
+    "client.AccessorKeyMapping",
+    "client.MixinAbstractClientPlayer",
+    "client.MixinMouseHandler",
+    "client.MixinPlayerRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
