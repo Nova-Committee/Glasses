@@ -2,9 +2,11 @@ package team.dovecotmc.glasses.common.network.msg;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
 import team.dovecotmc.glasses.util.Utilities;
+
+import java.util.function.Supplier;
 
 public class GlassesUseMessage {
     public GlassesUseMessage(FriendlyByteBuf buf) {
@@ -17,7 +19,8 @@ public class GlassesUseMessage {
 
     }
 
-    public void handler(CustomPayloadEvent.Context ctx) {
+    public void handler(Supplier<NetworkEvent.Context> sup) {
+        final NetworkEvent.Context ctx = sup.get();
         ctx.enqueueWork(() -> {
             final ServerPlayer player = ctx.getSender();
             if (player == null) return;

@@ -10,7 +10,6 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.network.PacketDistributor;
 import team.dovecotmc.glasses.client.keybinding.KeyBindings;
 import team.dovecotmc.glasses.common.network.handler.NetworkHandler;
 import team.dovecotmc.glasses.common.network.msg.GlassesUseMessage;
@@ -41,7 +40,7 @@ public class ForgeClientEventHandler {
         if (player == null) return;
         Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR).ifPresent(m -> {
             if (!KeyBindings.GLASSES_ACTION.consumeClick()) return;
-            NetworkHandler.INSTANCE.send(new GlassesUseMessage(), PacketDistributor.SERVER.noArg());
+            NetworkHandler.INSTANCE.sendToServer(new GlassesUseMessage());
         });
     }
 }
