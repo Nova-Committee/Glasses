@@ -30,7 +30,8 @@ public enum ItemRef implements Supplier<Item> {
                         SoundSource.PLAYERS, 1.0F, 1.0F);
                 tag.putBoolean("glasses_using", newStatus);
             })
-            .tooltip(() -> (s, l, t, f) -> t.add(Component.translatable("tooltips.glasses.monocular.use", KeyBindings.GLASSES_ACTION.getKey().getDisplayName())))
+            .tooltip(() -> (s, l, t, f) -> t.add(Component.translatable("tooltips.glasses.use",
+                    KeyBindings.GLASSES_ACTION.getKey().getDisplayName(), s.getItem().getName(s))))
             .build())),
     SUNGLASSES_STYLE1(sunGlasses(Artisans.TAPIO)),
     SUNGLASSES_STYLE2(sunGlasses(Artisans.GREYGOD)),

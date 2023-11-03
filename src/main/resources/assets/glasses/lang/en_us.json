@@ -12,5 +12,5 @@
   "itemGroup.glasses.glasses": "Glasses",
   "tooltips.glasses.artisan": "Artisan: %s",
   "tooltips.glasses.blocks_endermen": "This pair of glasses will prevent endermen from getting provoked when you look them in the eye.",
-  "tooltips.glasses.monocular.use": "Press \"%s\" to use the monocular."
+  "tooltips.glasses.use": "Press \"%1$s\" to use the %2$s."
 }

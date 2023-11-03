@@ -23,7 +23,7 @@ public class ForgeClientEventHandler {
         if (!(event.getPlayer() instanceof LocalPlayer player)) return;
         if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) return;
         Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR).ifPresent(m -> {
-            if (m.getOrCreateTag().getBoolean("glasses_using")) event.setNewFovModifier(.5F * event.getFovModifier());
+            if (m.getOrCreateTag().getBoolean("glasses_using")) event.setNewFovModifier(.2F * event.getFovModifier());
         });
     }
 
