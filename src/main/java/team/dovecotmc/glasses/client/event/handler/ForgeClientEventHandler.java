@@ -28,7 +28,7 @@ public class ForgeClientEventHandler {
     }
 
     @SubscribeEvent
-    public static void onRenderPlayer(RenderPlayerEvent event) {
+    public static void onRenderPlayer(RenderPlayerEvent.Pre event) {
         Utilities.getMatchedWearingItem(event.getEntity(), Utilities.MONOCULAR).ifPresent(m -> {
             if (m.getOrCreateTag().getBoolean("glasses_using"))
                 event.getRenderer().getModel().rightArmPose = HumanoidModel.ArmPose.SPYGLASS;
