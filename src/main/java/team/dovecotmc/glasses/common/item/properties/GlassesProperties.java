@@ -11,8 +11,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-public record GlassesProperties(Item.Properties properties, Supplier<TooltipProvider> tooltipProvider,
-                                PacketAction packetAction) {
+public record GlassesProperties(
+        Item.Properties properties, Supplier<TooltipProvider> tooltipProvider, PacketAction packetAction) {
     public static Builder builder() {
         return new Builder();
     }
