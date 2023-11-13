@@ -2,7 +2,6 @@ package team.dovecotmc.glasses.mixin.common;
 
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -17,7 +16,7 @@ import team.dovecotmc.glasses.common.item.base.GlassesItem;
 @Mixin(PlayerList.class)
 public abstract class MixinPlayerList {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
-    private void inject$placeNewPlayer(Connection connection, ServerPlayer player, CommonListenerCookie commonListenerCookie, CallbackInfo ci) {
+    private void inject$placeNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) {
         if (!Glasses.isTrinketsLoaded()) return;
         final ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
         if (!(helmet.getItem() instanceof GlassesItem)) return;
