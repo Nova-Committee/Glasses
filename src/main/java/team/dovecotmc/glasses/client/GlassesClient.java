@@ -19,14 +19,10 @@ public class GlassesClient implements ClientModInitializer {
         KeyBindingHelper.registerKeyBinding(KeyBindings.GLASSES_ACTION);
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (KeyBindings.GLASSES_ACTION.consumeClick()) {
-                System.out.println("key click");
                 final Player player = Minecraft.getInstance().player;
                 if (player == null) return;
-                System.out.println("player present");
-                Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR).ifPresent($ -> {
-                    System.out.println("wearing");
-                    ClientPlayNetworking.send(Glasses.GLASSES_USE, PacketByteBufs.create());
-                });
+                Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR)
+                        .ifPresent($ -> ClientPlayNetworking.send(Glasses.GLASSES_USE, PacketByteBufs.create()));
             }
         });
     }

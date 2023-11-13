@@ -22,9 +22,7 @@ public class Glasses implements ModInitializer {
         trinketsLoaded = FabricLoader.getInstance().isModLoaded("trinkets");
         RegistryHandler.init();
         ServerPlayNetworking.registerGlobalReceiver(GLASSES_USE, ((server, player, handler, buf, responseSender) -> {
-            System.out.println("packet received");
             if (player == null) return;
-            System.out.println("player(s) present");
             Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR).ifPresent(m -> {
                 if (m.getItem() instanceof GlassesItem g && g.getProperties().packetAction() != null)
                     g.onReceivePacket(player, m);
