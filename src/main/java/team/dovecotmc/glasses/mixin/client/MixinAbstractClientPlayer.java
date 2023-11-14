@@ -6,7 +6,7 @@ import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import team.dovecotmc.glasses.util.Utilities;
+import team.dovecotmc.glasses.util.common.CommonUtilities;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -17,7 +17,7 @@ public abstract class MixinAbstractClientPlayer {
         AtomicReference<Float> value0 = new AtomicReference<>(Mth.lerp(f, g, h));
         final Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || !mc.options.getCameraType().isFirstPerson()) return value0.get();
-        Utilities.getMatchedWearingItem(mc.player, Utilities.MONOCULAR).ifPresent(m -> {
+        CommonUtilities.getMatchedWearingItem(mc.player, CommonUtilities.MONOCULAR).ifPresent(m -> {
             if (m.getOrCreateTag().getBoolean("glasses_using")) value0.set(value0.get() * 0.2F);
         });
         return value0.get();
