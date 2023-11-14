@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.client.keybinding.KeyBindings;
+import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.common.info.Artisans;
 import team.dovecotmc.glasses.common.integration.trinkets.TrinketsComponentProvider;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
@@ -33,7 +33,7 @@ public enum ItemRef implements Supplier<Item> {
                 tag.putBoolean("glasses_using", newStatus);
             })
             .tooltip(() -> (s, l, t, f) -> t.add(Component.translatable("tooltips.glasses.use",
-                    ((AccessorKeyMapping) KeyBindings.GLASSES_ACTION).getKey().getDisplayName(), s.getItem().getName(s))))
+                    ((AccessorKeyMapping) KeyBindingRef.GLASSES_ACTION.get()).getKey().getDisplayName(), s.getItem().getName(s))))
             .build())),
     SUNGLASSES_STYLE1(sunGlasses(Artisans.TAPIO)),
     SUNGLASSES_STYLE2(sunGlasses(Artisans.GREYGOD)),
