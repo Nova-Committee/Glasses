@@ -7,7 +7,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.integration.curios.CuriosClientIntegration;
-import team.dovecotmc.glasses.client.keybinding.KeyBindings;
+import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
+
+import java.util.Arrays;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientEventHandler {
@@ -20,6 +22,8 @@ public class ModClientEventHandler {
 
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-        event.register(KeyBindings.GLASSES_ACTION);
+        Arrays.stream(KeyBindingRef.values())
+                .filter(r -> !r.needsCurios() || Glasses.isCuriosLoaded())
+                .forEach(r -> event.register(r.get()));
     }
 }

@@ -15,7 +15,7 @@ public class DummyBlockTagProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider p_256380_) {
+    protected void addTags(HolderLookup.Provider holderLookup) {
 
     }
 }
