@@ -19,7 +19,7 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
             InputConstants.KEY_V, "key.glasses.category"), mc -> {
         final Player player = mc.player;
         if (player == null) return;
-        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.MONOCULAR)
+        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES)
                 .ifPresent($ -> ClientPlayNetworking.send(Glasses.GLASSES_USE, PacketByteBufs.create()));
     }, false),
     GLASSES_OFFSET_X_PLUS(new KeyMapping("key.glasses.offset.x_plus",
