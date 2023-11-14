@@ -50,42 +50,42 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
             InputConstants.KEY_NUMPAD3, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.xRot += 0.01f;
-                o.xRot %= (float) Math.PI;
+                o.xRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_X_ROT_MINUS(new KeyMapping("key.glasses.offset.x_rot_minus",
             InputConstants.KEY_NUMPAD1, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.xRot -= 0.01f;
-                o.xRot %= (float) Math.PI;
+                o.xRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_Y_ROT_PLUS(new KeyMapping("key.glasses.offset.y_rot_plus",
             InputConstants.KEY_NUMPAD6, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.yRot += 0.01f;
-                o.yRot %= (float) Math.PI;
+                o.yRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_Y_ROT_MINUS(new KeyMapping("key.glasses.offset.y_rot_minus",
             InputConstants.KEY_NUMPAD4, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.yRot -= 0.01f;
-                o.yRot %= (float) Math.PI;
+                o.yRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_Z_ROT_PLUS(new KeyMapping("key.glasses.offset.z_rot_plus",
             InputConstants.KEY_NUMPAD9, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.zRot += 0.01f;
-                o.zRot %= (float) Math.PI;
+                o.zRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_Z_ROT_MINUS(new KeyMapping("key.glasses.offset.z_rot_minus",
             InputConstants.KEY_NUMPAD7, "key.glasses.category"),
             mc -> ClientUtilities.modifyOffset4GlassesWorn(mc.player, r -> r.modifyOffset(o -> {
                 o.zRot -= 0.01f;
-                o.zRot %= (float) Math.PI;
+                o.zRot %= (float) Math.PI * 2.0f;
             })),
             true),
     GLASSES_OFFSET_SAVE(new KeyMapping("key.glasses.offset.save",
