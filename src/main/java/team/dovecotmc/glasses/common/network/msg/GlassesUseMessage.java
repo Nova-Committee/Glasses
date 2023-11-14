@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
-import team.dovecotmc.glasses.util.Utilities;
+import team.dovecotmc.glasses.util.common.CommonUtilities;
 
 import java.util.function.Supplier;
 
@@ -24,7 +24,7 @@ public class GlassesUseMessage {
         ctx.enqueueWork(() -> {
             final ServerPlayer player = ctx.getSender();
             if (player == null) return;
-            Utilities.getMatchedWearingItem(player, Utilities.MONOCULAR).ifPresent(m -> {
+            CommonUtilities.getMatchedWearingItem(player, CommonUtilities.MONOCULAR).ifPresent(m -> {
                 if (m.getItem() instanceof GlassesItem g && g.getProperties().packetAction() != null)
                     g.onReceivePacket(player, m);
             });

@@ -1,4 +1,4 @@
-package team.dovecotmc.glasses.util;
+package team.dovecotmc.glasses.util.common;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +12,7 @@ import team.dovecotmc.glasses.common.ref.ItemRef;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class Utilities {
+public class CommonUtilities {
     public static final Predicate<ItemStack> GLASSES = s -> s.getItem() instanceof GlassesItem;
     public static final Predicate<ItemStack> SUNGLASSES = s -> s.getItem() instanceof SunglassesItem;
     public static final Predicate<ItemStack> MONOCULAR = s -> s.is(ItemRef.MONOCULAR.get());

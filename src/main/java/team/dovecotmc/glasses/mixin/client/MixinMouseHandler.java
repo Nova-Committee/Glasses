@@ -5,7 +5,7 @@ import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import team.dovecotmc.glasses.util.Utilities;
+import team.dovecotmc.glasses.util.common.CommonUtilities;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -15,7 +15,7 @@ public abstract class MixinMouseHandler {
     private boolean redirect$turnPlayer(LocalPlayer instance) {
         if (instance.isScoping()) return true;
         final AtomicBoolean b = new AtomicBoolean(false);
-        Utilities.getMatchedWearingItem(instance, Utilities.MONOCULAR).ifPresent(m -> {
+        CommonUtilities.getMatchedWearingItem(instance, CommonUtilities.MONOCULAR).ifPresent(m -> {
             if (m.getOrCreateTag().getBoolean("glasses_using")) b.set(true);
         });
         return b.get();

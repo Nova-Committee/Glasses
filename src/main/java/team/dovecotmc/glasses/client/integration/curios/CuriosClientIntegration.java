@@ -8,7 +8,7 @@ public class CuriosClientIntegration {
     public static void init() {
         ForgeRegistries.ITEMS.getValues().forEach(i -> {
             if (!(i instanceof GlassesItem)) return;
-            CuriosRendererRegistry.register(i, GlassesRenderer::new);
+            CuriosRendererRegistry.register(i, () -> new GlassesRenderer(i));
         });
     }
 }
