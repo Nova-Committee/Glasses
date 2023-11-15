@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public enum CreativeModeTabRef implements Supplier<CreativeModeTab> {
     GLASSES(() -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
             .title(Component.translatable("itemGroup.glasses.glasses"))
-            .icon(() -> ItemRef.SUNGLASSES_STYLE2.get().getDefaultInstance())
+            .icon(() -> ItemRef.GLASSES_5.get().getDefaultInstance())
             .displayItems((param, output) -> Arrays.stream(ItemRef.values()).forEach(r -> output.accept(r.get())))
             .build());
 
