@@ -19,10 +19,10 @@ import java.util.Locale;
 import java.util.function.Supplier;
 
 public enum ItemRef implements Supplier<Item> {
-    BEACH_GLASSES_STYLE1(sunGlasses(Artisans.GREYGOD)),
-    DETECTIVE_GLASSES(commonGlasses(Artisans.GREYGOD)),
-    MONOCLE_STYLE1(commonGlasses(Artisans.GREYGOD)),
-    MONOCULAR(commonGlasses(Artisans.GREYGOD, GlassesProperties.builder()
+    GLASSES_0(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_1(commonGlasses(Artisans.GREYGOD)),
+    GLASSES_2(commonGlasses(Artisans.GREYGOD)),
+    GLASSES_3(commonGlasses(Artisans.GREYGOD, GlassesProperties.builder()
             .packetAction((p, m) -> {
                 final CompoundTag tag = m.getOrCreateTag();
                 final boolean newStatus = !tag.getBoolean("glasses_using");
@@ -33,9 +33,9 @@ public enum ItemRef implements Supplier<Item> {
             .tooltip(() -> (s, l, t, f) -> t.add(Component.translatable("tooltips.glasses.use",
                     KeyBindingRef.GLASSES_ACTION.get().getKey().getDisplayName(), s.getItem().getName(s))))
             .build())),
-    SUNGLASSES_STYLE1(sunGlasses(Artisans.TAPIO)),
-    SUNGLASSES_STYLE2(sunGlasses(Artisans.GREYGOD)),
-    TACTICAL_GOGGLES_STYLE1(sunGlasses(Artisans.GREYGOD));
+    GLASSES_4(sunGlasses(Artisans.TAPIO)),
+    GLASSES_5(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_6(sunGlasses(Artisans.GREYGOD));
 
     ItemRef(Supplier<Item> sup) {
         this.reg = RegistryHandler.ITEMS.register(this.name().toLowerCase(Locale.ROOT), sup);
