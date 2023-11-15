@@ -35,5 +35,6 @@
   "msg.glasses.offset.reloaded": "%1$s Offset Config: Reloaded!",
   "tooltips.glasses.artisan": "Artisan: %s",
   "tooltips.glasses.blocks_endermen": "This pair of glasses will prevent endermen from getting provoked when you look them in the eye.",
+  "tooltips.glasses.technical": "Wow these boxes are awesome...",
   "tooltips.glasses.use": "Press \"%1$s\" to use the %2$s."
 }
