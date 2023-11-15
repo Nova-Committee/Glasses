@@ -35,7 +35,11 @@ public enum ItemRef implements Supplier<Item> {
             .build())),
     GLASSES_4(sunGlasses(Artisans.TAPIO)),
     GLASSES_5(sunGlasses(Artisans.GREYGOD)),
-    GLASSES_6(sunGlasses(Artisans.GREYGOD));
+    GLASSES_6(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_7(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_8(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_9(sunGlasses(Artisans.GREYGOD)),
+    GLASSES_10(sunGlasses(Artisans.GREYGOD));
 
     ItemRef(Supplier<Item> sup) {
         this.reg = RegistryHandler.ITEMS.register(this.name().toLowerCase(Locale.ROOT), sup);
