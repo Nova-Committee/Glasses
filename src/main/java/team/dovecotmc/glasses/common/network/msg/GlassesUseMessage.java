@@ -21,7 +21,7 @@ public class GlassesUseMessage {
         ctx.enqueueWork(() -> {
             final ServerPlayer player = ctx.getSender();
             if (player == null) return;
-            CommonUtilities.getMatchedWearingItem(player, CommonUtilities.MONOCULAR).ifPresent(m -> {
+            CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(m -> {
                 if (m.getItem() instanceof GlassesItem g && g.getProperties().packetAction() != null)
                     g.onReceivePacket(player, m);
             });
