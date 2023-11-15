@@ -7,7 +7,7 @@
   "mixins": [
   ],
   "client": [
-    "client.MixinEntityRenderDispatcher",
+    "client.MixinMinecraft",
     "client.MixinMouseHandler"
   ],
   "injectors": {
