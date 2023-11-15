@@ -9,11 +9,11 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.common.item.base.GlassesItem;
+import team.dovecotmc.glasses.common.ref.ItemRef;
 
+import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
 public class ItemTagProvider extends ItemTagsProvider {
@@ -27,8 +27,8 @@ public class ItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider holderLookup) {
-        tag(curios_glasses).add(ForgeRegistries.ITEMS.getValues().stream()
-                .filter(i -> i instanceof GlassesItem)
+        tag(curios_glasses).add(Arrays.stream(ItemRef.values())
+                .map(ItemRef::get)
                 .toArray(Item[]::new));
     }
 }
