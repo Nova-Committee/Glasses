@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 public class CommonUtilities {
     public static final Predicate<ItemStack> GLASSES = s -> s.getItem() instanceof GlassesItem;
     public static final Predicate<ItemStack> SUNGLASSES = s -> s.getItem() instanceof SunglassesItem;
-    public static final Predicate<ItemStack> MONOCULAR = s -> s.is(ItemRef.MONOCULAR.get());
+    public static final Predicate<ItemStack> MONOCULAR = s -> s.is(ItemRef.GLASSES_3.get());
 
     public static boolean isWearing(Player player, Predicate<ItemStack> filter) {
         return getMatchedWearingItem(player, filter).isPresent();
