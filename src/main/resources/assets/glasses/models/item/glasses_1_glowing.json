@@ -1,0 +1,7 @@
+{
+  "parent": "glasses:item/glasses_base_16x",
+  "textures": {
+    "1": "glasses:item/glasses_1_frames",
+    "2": "glasses:item/glasses_1_glowing_lens"
+  }
+}

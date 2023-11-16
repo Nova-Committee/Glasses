@@ -11,6 +11,8 @@ import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
 import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -101,6 +103,15 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
         this.key = key;
         this.action = action;
         this.needsTrinkets = needsTrinkets;
+    }
+
+    private static List<KeyBindingRef> functioning;
+
+    public static List<KeyBindingRef> getFunctioning() {
+        if (functioning == null) functioning = List.copyOf(Arrays.stream(KeyBindingRef.values())
+                .filter(r -> !r.needsTrinkets() || Glasses.isTrinketsLoaded())
+                .toList());
+        return functioning;
     }
 
     private final KeyMapping key;
