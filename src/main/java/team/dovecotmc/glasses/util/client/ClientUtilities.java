@@ -2,7 +2,6 @@ package team.dovecotmc.glasses.util.client;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -12,9 +11,9 @@ import org.apache.commons.io.FileUtils;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.config.DisplayOffset;
 import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
+import team.dovecotmc.glasses.client.integration.curios.TrinketsClientIntegration;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.mixin.client.AccessorKeyMapping;
-import team.dovecotmc.glasses.util.common.CommonUtilities;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -29,10 +28,7 @@ public class ClientUtilities {
 
     public static void modifyOffset4GlassesWorn(Player player, Consumer<GlassesRenderer> modifier) {
         if (!Glasses.isTrinketsLoaded() || player == null) return;
-        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(s -> {
-            if (!(TrinketRendererRegistry.getRenderer(s.getItem()).orElse(null) instanceof GlassesRenderer r)) return;
-            modifier.accept(r);
-        });
+        TrinketsClientIntegration.modifyOffset(player, modifier);
     }
 
     public static Optional<DisplayOffset> getOffsetConfig(String glassesName) {

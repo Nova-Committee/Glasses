@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
@@ -12,6 +13,7 @@ import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class TrinketsClientIntegration {
     public static void init() {
@@ -34,6 +36,21 @@ public class TrinketsClientIntegration {
             ClientTickEvents.END_CLIENT_TICK.register(mc -> {
                 while (k.consumeClick()) r.getAction().accept(mc);
             });
+        });
+    }
+
+    public static void remindPlayer(Player player) {
+        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(s -> {
+            if (!(TrinketRendererRegistry.getRenderer(s.getItem()).orElse(null) instanceof GlassesRenderer g))
+                return;
+            if (!g.isSaved()) ClientUtilities.remindPlayer(player, s);
+        });
+    }
+
+    public static void modifyOffset(Player player, Consumer<GlassesRenderer> modifier) {
+        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(s -> {
+            if (!(TrinketRendererRegistry.getRenderer(s.getItem()).orElse(null) instanceof GlassesRenderer r)) return;
+            modifier.accept(r);
         });
     }
 }

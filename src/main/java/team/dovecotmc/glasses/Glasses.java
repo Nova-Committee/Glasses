@@ -27,7 +27,9 @@ public class Glasses implements ModInitializer {
         ServerPlayNetworking.registerGlobalReceiver(GLASSES_USE, ((server, player, handler, buf, responseSender) -> {
             if (player == null) return;
             CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(m -> {
-                if (m.getItem() instanceof GlassesItem g && g.getProperties().packetAction() != null)
+                if (m.getItem() instanceof GlassesItem g
+                        && (g.getProperties().packetAction() != null
+                        || g.getProperties().canUse()))
                     g.onReceivePacket(player, m);
             });
         }));
