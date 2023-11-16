@@ -10,10 +10,9 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.commons.io.FileUtils;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.config.DisplayOffset;
+import team.dovecotmc.glasses.client.integration.curios.CuriosClientIntegration;
 import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
-import team.dovecotmc.glasses.util.common.CommonUtilities;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -28,10 +27,7 @@ public class ClientUtilities {
 
     public static void modifyOffset4GlassesWorn(Player player, Consumer<GlassesRenderer> modifier) {
         if (!Glasses.isCuriosLoaded() || player == null) return;
-        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(s -> {
-            if (!(CuriosRendererRegistry.getRenderer(s.getItem()).orElse(null) instanceof GlassesRenderer r)) return;
-            modifier.accept(r);
-        });
+        CuriosClientIntegration.modifyOffset(player, modifier);
     }
 
     public static Optional<DisplayOffset> getOffsetConfig(String glassesName) {

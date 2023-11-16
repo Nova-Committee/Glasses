@@ -7,12 +7,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.network.PacketDistributor;
+import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
 import team.dovecotmc.glasses.common.network.handler.NetworkHandler;
 import team.dovecotmc.glasses.common.network.msg.GlassesUseMessage;
 import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -148,6 +151,15 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
         this.key = key;
         this.action = action;
         this.needsCurios = needsCurios;
+    }
+
+    private static List<KeyBindingRef> functioning;
+
+    public static List<KeyBindingRef> getFunctioning() {
+        if (functioning == null) functioning = List.copyOf(Arrays.stream(KeyBindingRef.values())
+                .filter(r -> !r.needsCurios() || Glasses.isCuriosLoaded())
+                .toList());
+        return functioning;
     }
 
     private final KeyMapping key;

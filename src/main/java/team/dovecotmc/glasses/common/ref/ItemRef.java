@@ -1,10 +1,8 @@
 package team.dovecotmc.glasses.common.ref;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import team.dovecotmc.glasses.Glasses;
@@ -20,16 +18,12 @@ import java.util.function.Supplier;
 
 public enum ItemRef implements Supplier<Item> {
     GLASSES_0(sunGlasses(Artisans.GREYGOD)),
-    GLASSES_1(commonGlasses(Artisans.GREYGOD)),
+    GLASSES_1(commonGlasses(Artisans.GREYGOD, GlassesProperties.builder()
+            .canUse(SoundEvents.STONE_BUTTON_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF)
+            .build())),
     GLASSES_2(commonGlasses(Artisans.GREYGOD)),
     GLASSES_3(commonGlasses(Artisans.GREYGOD, GlassesProperties.builder()
-            .packetAction((p, m) -> {
-                final CompoundTag tag = m.getOrCreateTag();
-                final boolean newStatus = !tag.getBoolean("glasses_using");
-                p.playNotifySound(newStatus ? SoundEvents.SPYGLASS_USE : SoundEvents.SPYGLASS_STOP_USING,
-                        SoundSource.PLAYERS, 1.0F, 1.0F);
-                tag.putBoolean("glasses_using", newStatus);
-            })
+            .canUse(SoundEvents.SPYGLASS_USE, SoundEvents.SPYGLASS_STOP_USING)
             .build())),
     GLASSES_4(sunGlasses(Artisans.TAPIO)),
     GLASSES_5(sunGlasses(Artisans.GREYGOD)),
@@ -37,13 +31,7 @@ public enum ItemRef implements Supplier<Item> {
     GLASSES_7(sunGlasses(Artisans.GREYGOD)),
     GLASSES_8(sunGlasses(Artisans.GREYGOD)),
     GLASSES_9(sunGlasses(Artisans.GREYGOD, GlassesProperties.builder()
-            .packetAction((p, m) -> {
-                final CompoundTag tag = m.getOrCreateTag();
-                final boolean newStatus = !tag.getBoolean("glasses_using");
-                p.playNotifySound(newStatus ? SoundEvents.STONE_BUTTON_CLICK_ON : SoundEvents.STONE_BUTTON_CLICK_OFF,
-                        SoundSource.PLAYERS, 1.0F, 1.0F);
-                tag.putBoolean("glasses_using", newStatus);
-            })
+            .canUse(SoundEvents.STONE_BUTTON_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF)
             .tooltip(() -> (s, w, l, f) -> l.add(Component.translatable("tooltips.glasses.technical")
                     .withStyle(ChatFormatting.GREEN)))
             .build())),
