@@ -25,7 +25,9 @@ public class GlassesUseMessage {
             final ServerPlayer player = ctx.getSender();
             if (player == null) return;
             CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(m -> {
-                if (m.getItem() instanceof GlassesItem g && g.getProperties().packetAction() != null)
+                if (m.getItem() instanceof GlassesItem g
+                        && (g.getProperties().packetAction() != null
+                        || g.getProperties().canUse()))
                     g.onReceivePacket(player, m);
             });
         });

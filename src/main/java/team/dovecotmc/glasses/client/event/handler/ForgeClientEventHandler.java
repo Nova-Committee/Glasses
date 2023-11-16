@@ -11,13 +11,10 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
+import team.dovecotmc.glasses.Glasses;
+import team.dovecotmc.glasses.client.integration.curios.CuriosClientIntegration;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
-import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
-import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-
-import java.util.Arrays;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ForgeClientEventHandler {
@@ -40,20 +37,17 @@ public class ForgeClientEventHandler {
 
     @SubscribeEvent
     public static void onKey(InputEvent.Key event) {
-        Arrays.stream(KeyBindingRef.values()).forEach(r -> {
+        KeyBindingRef.getFunctioning().forEach(r -> {
             if (r.get().consumeClick()) r.getAction().accept(Minecraft.getInstance());
         });
     }
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (!Glasses.isCuriosLoaded()) return;
         if (!event.phase.equals(TickEvent.Phase.END)) return;
         final Player player = Minecraft.getInstance().player;
         if (player == null) return;
-        CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(s -> {
-            if (!(CuriosRendererRegistry.getRenderer(s.getItem()).orElse(null) instanceof GlassesRenderer g))
-                return;
-            if (!g.isSaved()) ClientUtilities.remindPlayer(player, s);
-        });
+        CuriosClientIntegration.remindPlayer(player);
     }
 }

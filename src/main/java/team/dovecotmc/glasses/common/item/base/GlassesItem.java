@@ -1,8 +1,10 @@
 package team.dovecotmc.glasses.common.item.base;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +42,7 @@ public class GlassesItem extends Item {
         list.add(Component.translatable("tooltips.glasses.artisan", artisan));
         if (this instanceof SunglassesItem)
             list.add(Component.translatable("tooltips.glasses.blocks_endermen").withStyle(ChatFormatting.LIGHT_PURPLE));
-        if (properties.packetAction() != null)
+        if (properties.packetAction() != null || properties.canUse())
             list.add(Component.translatable("tooltips.glasses.use",
                     KeyBindingRef.GLASSES_ACTION.get().getKey().getDisplayName(),
                     Component.translatable(stack.getItem().getDescriptionId())));
@@ -48,6 +50,16 @@ public class GlassesItem extends Item {
     }
 
     public void onReceivePacket(ServerPlayer player, ItemStack stack) {
+        if (properties.canUse()) {
+            final CompoundTag tag = stack.getOrCreateTag();
+            final boolean newStatus = !tag.getBoolean("glasses_using");
+            if (newStatus) {
+                if (properties.startUsing() != null) player.playNotifySound(properties.startUsing(),
+                        SoundSource.PLAYERS, 1.0F, 1.0F);
+            } else if (properties.stopUsing() != null) player.playNotifySound(properties.stopUsing(),
+                    SoundSource.PLAYERS, 1.0F, 1.0F);
+            tag.putBoolean("glasses_using", newStatus);
+        }
         if (properties.packetAction() != null) properties.packetAction().run(player, stack);
     }
 

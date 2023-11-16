@@ -18,7 +18,8 @@ public abstract class MixinMinecraft {
         if (cir.getReturnValue() || Minecraft.getInstance().player == null) return;
         final AtomicBoolean b = new AtomicBoolean(false);
         CommonUtilities.getMatchedWearingItem(Minecraft.getInstance().player, s -> s.is(ItemRef.GLASSES_9.get()))
-                .ifPresent(s -> b.set(s.getOrCreateTag().getBoolean("glasses_using")));
+                .ifPresent(s -> b.set(s.getOrCreateTag().getBoolean("glasses_using")
+                        && Minecraft.getInstance().options.getCameraType().isFirstPerson()));
         cir.setReturnValue(b.get());
     }
 }

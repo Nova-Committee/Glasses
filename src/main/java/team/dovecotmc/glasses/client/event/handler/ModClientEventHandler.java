@@ -1,15 +1,17 @@
 package team.dovecotmc.glasses.client.event.handler;
 
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.integration.curios.CuriosClientIntegration;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
-
-import java.util.Arrays;
+import team.dovecotmc.glasses.common.item.base.GlassesItem;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModClientEventHandler {
@@ -22,8 +24,17 @@ public class ModClientEventHandler {
 
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-        Arrays.stream(KeyBindingRef.values())
-                .filter(r -> !r.needsCurios() || Glasses.isCuriosLoaded())
-                .forEach(r -> event.register(r.get()));
+        KeyBindingRef.getFunctioning().forEach(r -> event.register(r.get()));
+    }
+
+    @SubscribeEvent
+    public static void overrideRegistry(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            ForgeRegistries.ITEMS.forEach(i -> {
+                if (!(i instanceof GlassesItem g)) return;
+                if (g.getProperties().canUse()) ItemProperties.register(g, new ResourceLocation("on"),
+                        (stack, world, entity, item) -> stack.getOrCreateTag().getBoolean("glasses_using") ? 1 : 0);
+            });
+        });
     }
 }
