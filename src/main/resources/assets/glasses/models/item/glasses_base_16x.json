@@ -5,7 +5,7 @@
     32
   ],
   "textures": {
-    "particle": "block/iron_block"
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

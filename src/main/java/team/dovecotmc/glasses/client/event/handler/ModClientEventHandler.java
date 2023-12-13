@@ -30,7 +30,7 @@ public class ModClientEventHandler {
     @SubscribeEvent
     public static void overrideRegistry(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ForgeRegistries.ITEMS.forEach(i -> {
+            ForgeRegistries.ITEMS.getValues().parallelStream().forEach(i -> {
                 if (!(i instanceof GlassesItem g)) return;
                 if (g.getProperties().canUse()) ItemProperties.register(g, new ResourceLocation("on"),
                         (stack, world, entity, item) -> stack.getOrCreateTag().getBoolean("glasses_using") ? 1 : 0);

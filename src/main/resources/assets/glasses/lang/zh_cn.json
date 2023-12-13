@@ -1,5 +1,6 @@
 {
   "artisan.glasses.greygod": "咒神灰",
+  "artisan.glasses.shou_zhang": "有点懒的首长",
   "artisan.glasses.tapio": "北斗余晖",
   "curios.identifier.glasses": "眼镜",
   "item.glasses.glasses_0": "沙滩太阳镜",
@@ -13,6 +14,8 @@
   "item.glasses.glasses_8": "太阳镜（猫耳）",
   "item.glasses.glasses_9": "科技目镜",
   "item.glasses.glasses_10": "太阳镜（三角）",
+  "item.glasses.glasses_11": "夏日太阳镜",
+  "item.glasses.glasses_12": "冬日太阳镜",
   "itemGroup.glasses.glasses": "眼镜",
   "key.glasses.glasses_use": "眼镜：使用",
   "key.glasses.category": "眼镜",
@@ -35,6 +38,8 @@
   "msg.glasses.offset.reloaded": "%1$s佩戴偏移配置：已重载！",
   "tooltips.glasses.artisan": "工匠：%s",
   "tooltips.glasses.blocks_endermen": "这副眼镜可以防止末影人在被你直视时发怒",
+  "tooltips.glasses.shades_summer": "它在夏季非常有名。",
+  "tooltips.glasses.shades_winter": "它在冬季没那么有名。",
   "tooltips.glasses.technical": "我去，这框真帅吧。",
   "tooltips.glasses.use": "按“%1$s”使用%2$s。"
 }

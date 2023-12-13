@@ -48,6 +48,7 @@ public class GlassesRenderer implements ICurioRenderer {
         if (offset != null) {
             poseStack.translate(offset.x, offset.y, offset.z);
             poseStack.mulPose(new Quaternionf().rotationZYX(offset.zRot, offset.yRot, offset.xRot));
+            poseStack.scale(offset.xScale, offset.yScale, offset.zScale);
         }
         final Minecraft mc = Minecraft.getInstance();
         mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.HEAD, light, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, mc.level, 0);

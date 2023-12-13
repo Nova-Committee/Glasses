@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 public class CuriosClientIntegration {
     public static void init() {
-        ForgeRegistries.ITEMS.getValues().forEach(i -> {
+        ForgeRegistries.ITEMS.getValues().parallelStream().forEach(i -> {
             if (!(i instanceof GlassesItem)) return;
             CuriosRendererRegistry.register(i, () -> new GlassesRenderer(i));
         });
