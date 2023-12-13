@@ -1,4 +1,5 @@
 {
+  "parent": "minecraft:story/root",
   "display": {
     "background": "minecraft:textures/block/oak_planks.png",
     "icon": {
@@ -13,7 +14,7 @@
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": true
+    "hidden": false
   },
   "criteria": {
     "artisan": {
