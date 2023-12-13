@@ -1,4 +1,4 @@
-package team.dovecotmc.glasses.client.integration.curios;
+package team.dovecotmc.glasses.client.integration.trinkets;
 
 import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 public class TrinketsClientIntegration {
     public static void init() {
-        BuiltInRegistries.ITEM.entrySet().forEach(e -> {
+        BuiltInRegistries.ITEM.entrySet().parallelStream().forEach(e -> {
             final Item i = e.getValue();
             if (!(i instanceof GlassesItem)) return;
             TrinketRendererRegistry.registerRenderer(i, new GlassesRenderer(i));

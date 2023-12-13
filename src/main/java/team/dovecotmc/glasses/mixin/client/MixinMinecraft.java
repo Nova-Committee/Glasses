@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.client.integration.curios.TrinketsClientIntegration;
+import team.dovecotmc.glasses.client.integration.trinkets.TrinketsClientIntegration;
 import team.dovecotmc.glasses.common.ref.ItemRef;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
 

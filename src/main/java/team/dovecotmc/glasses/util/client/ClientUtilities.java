@@ -10,8 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import org.apache.commons.io.FileUtils;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.config.DisplayOffset;
-import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
-import team.dovecotmc.glasses.client.integration.curios.TrinketsClientIntegration;
+import team.dovecotmc.glasses.client.integration.trinkets.GlassesRenderer;
+import team.dovecotmc.glasses.client.integration.trinkets.TrinketsClientIntegration;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.mixin.client.AccessorKeyMapping;
 

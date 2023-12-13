@@ -7,7 +7,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
+import team.dovecotmc.glasses.client.integration.trinkets.GlassesRenderer;
 import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
 

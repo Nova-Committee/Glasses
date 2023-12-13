@@ -1,5 +1,7 @@
 package team.dovecotmc.glasses.mixin.common;
 
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -11,12 +13,25 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import team.dovecotmc.glasses.Glasses;
+import team.dovecotmc.glasses.common.info.Artisan;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
+import team.dovecotmc.glasses.util.common.CommonUtilities;
+
+import java.util.Objects;
 
 @Mixin(PlayerList.class)
 public abstract class MixinPlayerList {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
     private void inject$placeNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) {
+        if ((Object) player instanceof ServerPlayer sp && Artisan.Cache.shouldGiveGlasses(sp.getUUID())) {
+            final Advancement adv = sp.server.getAdvancements().getAdvancement(CommonUtilities.ADV_ARTISAN);
+            final AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(Objects.requireNonNull(adv));
+            if (!progress.isDone()) {
+                final Iterable<String> criteria = progress.getRemainingCriteria();
+                for (final String cr : criteria) sp.getAdvancements().award(adv, cr);
+                CommonUtilities.giveItemsToPlayer(sp, Artisan.Cache.getGlassesToGive(sp.getUUID()));
+            }
+        }
         if (!Glasses.isTrinketsLoaded()) return;
         final ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
         if (!(helmet.getItem() instanceof GlassesItem)) return;

@@ -8,7 +8,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import team.dovecotmc.glasses.Glasses;
-import team.dovecotmc.glasses.client.integration.curios.TrinketsClientIntegration;
+import team.dovecotmc.glasses.client.integration.trinkets.TrinketsClientIntegration;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.common.item.base.GlassesItem;
 
@@ -26,7 +26,7 @@ public class GlassesClient implements ClientModInitializer {
                 while (k.consumeClick()) r.getAction().accept(mc);
             });
         });
-        BuiltInRegistries.ITEM.forEach(i -> {
+        BuiltInRegistries.ITEM.entrySet().parallelStream().forEach(i -> {
             if (!(i instanceof GlassesItem g)) return;
             if (g.getProperties().canUse()) FabricModelPredicateProviderRegistry.register(g, new ResourceLocation("on"),
                     (stack, world, entity, item) -> stack.getOrCreateTag().getBoolean("glasses_using") ? 1 : 0);
