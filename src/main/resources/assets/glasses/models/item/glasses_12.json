@@ -1,0 +1,6 @@
+{
+  "parent": "glasses:item/glasses_custom_0",
+  "textures": {
+    "1": "glasses:item/glasses_12"
+  }
+}

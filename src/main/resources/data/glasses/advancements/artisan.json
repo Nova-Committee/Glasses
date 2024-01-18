@@ -1,0 +1,27 @@
+{
+  "parent": "minecraft:story/root",
+  "display": {
+    "background": "minecraft:textures/block/oak_planks.png",
+    "icon": {
+      "item": "glasses:glasses_2"
+    },
+    "title": {
+      "translate": "advancements.glasses.artisan.title"
+    },
+    "description": {
+      "translate": "advancements.glasses.artisan.desc"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "artisan": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "rewards": {
+    "experience": 1000
+  }
+}
