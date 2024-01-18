@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
+import net.minecraftforge.network.PacketDistributor;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
 import team.dovecotmc.glasses.common.network.handler.NetworkHandler;
@@ -27,7 +28,7 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
         final Player player = mc.player;
         if (player == null) return;
         CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES)
-                .ifPresent($ -> NetworkHandler.INSTANCE.sendToServer(new GlassesUseMessage()));
+                .ifPresent($ -> NetworkHandler.INSTANCE.send(new GlassesUseMessage(), PacketDistributor.SERVER.noArg()));
     }, false),
     GLASSES_OFFSET_X_PLUS(new KeyMapping("key.glasses.offset.x_plus",
             KeyConflictContext.IN_GAME,

@@ -1,6 +1,6 @@
 package team.dovecotmc.glasses.common.event.handler;
 
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,7 +23,7 @@ public class ForgeEventHandler {
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         final Player player = event.getEntity();
         if (player instanceof ServerPlayer sp && Artisan.Cache.shouldGiveGlasses(sp.getUUID())) {
-            final Advancement adv = sp.server.getAdvancements().getAdvancement(CommonUtilities.ADV_ARTISAN);
+            final AdvancementHolder adv = sp.server.getAdvancements().get(CommonUtilities.ADV_ARTISAN);
             final AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(Objects.requireNonNull(adv));
             if (!progress.isDone()) {
                 final Iterable<String> criteria = progress.getRemainingCriteria();
