@@ -17,7 +17,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_name}-NeoForge-${neo_version}"
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -78,8 +78,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}"
-    // Curios is not updated to nf 20.4.80
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}"
     compileOnly "top.theillusivec4.curios:curios-neoforge:${project.curios_version}:api"
 }
 

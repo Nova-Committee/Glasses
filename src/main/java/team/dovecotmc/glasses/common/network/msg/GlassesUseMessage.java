@@ -1,25 +1,34 @@
 package team.dovecotmc.glasses.common.network.msg;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
-import team.dovecotmc.glasses.Glasses;
+import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.NetworkEvent;
+import team.dovecotmc.glasses.common.item.base.GlassesItem;
+import team.dovecotmc.glasses.util.common.CommonUtilities;
 
-public class GlassesUseMessage implements CustomPacketPayload {
-    public static final ResourceLocation ID = new ResourceLocation(Glasses.MODID, "use");
-
+public class GlassesUseMessage {
     public GlassesUseMessage(FriendlyByteBuf buf) {
     }
 
     public GlassesUseMessage() {
     }
 
-    @Override
-    public void write(FriendlyByteBuf pBuffer) {
+    public void toBytes(FriendlyByteBuf buf) {
+
     }
 
-    @Override
-    public ResourceLocation id() {
-        return ID;
+    public void handler(NetworkEvent.Context ctx) {
+        ctx.enqueueWork(() -> {
+            final ServerPlayer player = ctx.getSender();
+            if (player == null) return;
+            CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES).ifPresent(m -> {
+                if (m.getItem() instanceof GlassesItem g
+                        && (g.getProperties().packetAction() != null
+                        || g.getProperties().canUse()))
+                    g.onReceivePacket(player, m);
+            });
+        });
+        ctx.setPacketHandled(true);
     }
+
 }

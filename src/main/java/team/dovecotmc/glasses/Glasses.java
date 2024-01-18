@@ -6,6 +6,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 import team.dovecotmc.glasses.common.init.RegistryHandler;
+import team.dovecotmc.glasses.common.network.handler.NetworkHandler;
 
 @Mod(Glasses.MODID)
 public class Glasses {
@@ -16,6 +17,7 @@ public class Glasses {
     public Glasses(IEventBus bus) {
         curiosLoaded = ModList.get().isLoaded("curios");
         RegistryHandler.init(bus);
+        NetworkHandler.registerMessage();
     }
 
     public static boolean isCuriosLoaded() {

@@ -8,6 +8,7 @@ import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.client.settings.KeyModifier;
 import team.dovecotmc.glasses.Glasses;
 import team.dovecotmc.glasses.client.integration.curios.GlassesRenderer;
+import team.dovecotmc.glasses.common.network.handler.NetworkHandler;
 import team.dovecotmc.glasses.common.network.msg.GlassesUseMessage;
 import team.dovecotmc.glasses.util.client.ClientUtilities;
 import team.dovecotmc.glasses.util.common.CommonUtilities;
@@ -26,7 +27,7 @@ public enum KeyBindingRef implements Supplier<KeyMapping> {
         final LocalPlayer player = mc.player;
         if (player == null) return;
         CommonUtilities.getMatchedWearingItem(player, CommonUtilities.GLASSES)
-                .ifPresent($ -> player.connection.send(new GlassesUseMessage()));
+                .ifPresent($ -> NetworkHandler.INSTANCE.sendToServer(new GlassesUseMessage()));
     }, false),
     GLASSES_OFFSET_X_PLUS(new KeyMapping("key.glasses.offset.x_plus",
             KeyConflictContext.IN_GAME,
