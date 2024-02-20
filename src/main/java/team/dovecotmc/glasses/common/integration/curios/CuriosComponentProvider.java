@@ -8,6 +8,7 @@ import team.dovecotmc.glasses.common.item.base.GlassesItemCurios;
 import team.dovecotmc.glasses.common.item.impl.SunglassesItemCurios;
 import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -35,8 +36,6 @@ public class CuriosComponentProvider {
     }
 
     public static Optional<ItemStack> getMatchedWearingItem(LivingEntity entity, Predicate<ItemStack> filter) {
-        return CuriosApi.getCuriosInventory(entity)
-                .map(i -> i.findFirstCurio(filter))
-                .map(r -> r.isPresent() ? r.get().stack() : ItemStack.EMPTY);
+        return CuriosApi.getCuriosHelper().findFirstCurio(entity, filter).map(SlotResult::stack);
     }
 }

@@ -21,7 +21,7 @@ import java.util.Objects;
 public class ForgeEventHandler {
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        final Player player = event.getEntity();
+        final Player player = event.getPlayer();
         if (player instanceof ServerPlayer sp && Artisan.Cache.shouldGiveGlasses(sp.getUUID())) {
             final Advancement adv = sp.server.getAdvancements().getAdvancement(CommonUtilities.ADV_ARTISAN);
             final AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(Objects.requireNonNull(adv));
@@ -36,8 +36,8 @@ public class ForgeEventHandler {
         if (!(helmet.getItem() instanceof GlassesItem)) return;
         player.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
         if (!player.getInventory().add(helmet)) {
-            final ItemEntity ie = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), helmet);
-            player.level().addFreshEntity(ie);
+            final ItemEntity ie = new ItemEntity(player.level, player.getX(), player.getY(), player.getZ(), helmet);
+            player.level.addFreshEntity(ie);
         }
     }
 }

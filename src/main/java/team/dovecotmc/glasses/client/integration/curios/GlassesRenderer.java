@@ -1,21 +1,21 @@
 package team.dovecotmc.glasses.client.integration.curios;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.joml.Quaternionf;
 import team.dovecotmc.glasses.client.config.DisplayOffset;
 import team.dovecotmc.glasses.util.client.ClientUtilities;
 import top.theillusivec4.curios.api.SlotContext;
@@ -47,11 +47,11 @@ public class GlassesRenderer implements ICurioRenderer {
         CustomHeadLayer.translateToHead(poseStack, false);
         if (offset != null) {
             poseStack.translate(offset.x, offset.y, offset.z);
-            poseStack.mulPose(new Quaternionf().rotationZYX(offset.zRot, offset.yRot, offset.xRot));
+            poseStack.mulPose(Quaternion.fromYXZ(offset.yRot, offset.xRot, offset.zRot));
             poseStack.scale(offset.xScale, offset.yScale, offset.zScale);
         }
         final Minecraft mc = Minecraft.getInstance();
-        mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.HEAD, light, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, mc.level, 0);
+        mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.HEAD, light, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, 0);
     }
 
     public void modifyOffset(Consumer<DisplayOffset> modifier) {
@@ -63,16 +63,16 @@ public class GlassesRenderer implements ICurioRenderer {
         this.offset = ClientUtilities.getOffsetConfig(glassesName).orElse(null);
         this.saved = true;
         if (Minecraft.getInstance().player == null) return;
-        Minecraft.getInstance().player.displayClientMessage(Component.translatable("msg.glasses.offset.reloaded",
-                Component.translatable(glasses.getDescriptionId())).withStyle(ChatFormatting.YELLOW), true);
+        Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("msg.glasses.offset.reloaded",
+                new TranslatableComponent(glasses.getDescriptionId())).withStyle(ChatFormatting.YELLOW), true);
     }
 
     public void saveOffset() {
         ClientUtilities.saveOffsetConfig(ClientUtilities.getGlassesOffsetPath(glassesName), offset);
         this.saved = true;
         if (Minecraft.getInstance().player == null) return;
-        Minecraft.getInstance().player.displayClientMessage(Component.translatable("msg.glasses.offset.saved",
-                Component.translatable(glasses.getDescriptionId())).withStyle(ChatFormatting.GREEN), true);
+        Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("msg.glasses.offset.saved",
+                new TranslatableComponent(glasses.getDescriptionId())).withStyle(ChatFormatting.GREEN), true);
     }
 
     public boolean isSaved() {

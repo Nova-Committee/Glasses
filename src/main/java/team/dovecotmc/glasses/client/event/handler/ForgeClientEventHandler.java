@@ -5,7 +5,7 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ComputeFovModifierEvent;
+import net.minecraftforge.client.event.FOVModifierEvent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
@@ -19,24 +19,24 @@ import team.dovecotmc.glasses.util.common.CommonUtilities;
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ForgeClientEventHandler {
     @SubscribeEvent
-    public static void onFov(ComputeFovModifierEvent event) {
-        if (!(event.getPlayer() instanceof LocalPlayer player)) return;
+    public static void onFov(FOVModifierEvent event) {
+        if (!(event.getEntity() instanceof LocalPlayer player)) return;
         if (!Minecraft.getInstance().options.getCameraType().isFirstPerson()) return;
         CommonUtilities.getMatchedWearingItem(player, CommonUtilities.MONOCULAR).ifPresent(m -> {
-            if (m.getOrCreateTag().getBoolean("glasses_using")) event.setNewFovModifier(.2F * event.getFovModifier());
+            if (m.getOrCreateTag().getBoolean("glasses_using")) event.setNewfov(.2F * event.getFov());
         });
     }
 
     @SubscribeEvent
     public static void onRenderPlayer(RenderPlayerEvent.Pre event) {
-        CommonUtilities.getMatchedWearingItem(event.getEntity(), CommonUtilities.MONOCULAR).ifPresent(m -> {
+        CommonUtilities.getMatchedWearingItem(event.getPlayer(), CommonUtilities.MONOCULAR).ifPresent(m -> {
             if (m.getOrCreateTag().getBoolean("glasses_using"))
                 event.getRenderer().getModel().rightArmPose = HumanoidModel.ArmPose.SPYGLASS;
         });
     }
 
     @SubscribeEvent
-    public static void onKey(InputEvent.Key event) {
+    public static void onKey(InputEvent.KeyInputEvent event) {
         KeyBindingRef.getFunctioning().forEach(r -> {
             if (r.get().consumeClick()) r.getAction().accept(Minecraft.getInstance());
         });

@@ -3,7 +3,7 @@ package team.dovecotmc.glasses.util.client;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -77,8 +77,8 @@ public class ClientUtilities {
     }
 
     public static void remindPlayer(Player player, ItemStack stack) {
-        player.displayClientMessage(Component.translatable("msg.glasses.offset.needs_save",
-                Component.translatable(stack.getItem().getDescriptionId()),
+        player.displayClientMessage(new TranslatableComponent("msg.glasses.offset.needs_save",
+                new TranslatableComponent(stack.getItem().getDescriptionId()),
                 KeyBindingRef.GLASSES_OFFSET_SAVE.get().getKey().getDisplayName(),
                 KeyBindingRef.GLASSES_OFFSET_RELOAD.get().getKey().getDisplayName()
         ).withStyle(ChatFormatting.AQUA), true);

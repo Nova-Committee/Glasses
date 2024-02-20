@@ -3,6 +3,7 @@ package team.dovecotmc.glasses.common.item.base;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -39,13 +40,13 @@ public class GlassesItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
         super.appendHoverText(stack, level, list, flag);
-        list.add(Component.translatable("tooltips.glasses.artisan", artisan));
+        list.add(new TranslatableComponent("tooltips.glasses.artisan", artisan));
         if (this instanceof SunglassesItem)
-            list.add(Component.translatable("tooltips.glasses.blocks_endermen").withStyle(ChatFormatting.LIGHT_PURPLE));
+            list.add(new TranslatableComponent("tooltips.glasses.blocks_endermen").withStyle(ChatFormatting.LIGHT_PURPLE));
         if (properties.packetAction() != null || properties.canUse())
-            list.add(Component.translatable("tooltips.glasses.use",
+            list.add(new TranslatableComponent("tooltips.glasses.use",
                     KeyBindingRef.GLASSES_ACTION.get().getKey().getDisplayName(),
-                    Component.translatable(stack.getItem().getDescriptionId())));
+                    new TranslatableComponent(stack.getItem().getDescriptionId())));
         properties.tooltipProvider().get().modify(stack, level, list, flag);
     }
 

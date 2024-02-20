@@ -3,6 +3,7 @@ package team.dovecotmc.glasses.common.info;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import team.dovecotmc.glasses.common.ref.ItemRef;
 
@@ -43,7 +44,7 @@ public enum Artisan {
     private final Supplier<List<ItemStack>> glassesToGive;
 
     public Component getName() {
-        return Component.translatable("artisan.glasses." + id).withStyle(style);
+        return new TranslatableComponent("artisan.glasses." + id).withStyle(style);
     }
 
     public UUID getUuid() {

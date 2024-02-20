@@ -1,7 +1,7 @@
 package team.dovecotmc.glasses.common.ref;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -33,16 +33,16 @@ public enum ItemRef implements Supplier<Item> {
     GLASSES_8(sunGlasses(Artisan.GREYGOD)),
     GLASSES_9(sunGlasses(Artisan.GREYGOD, GlassesProperties.builder()
             .canUse(SoundEvents.STONE_BUTTON_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF)
-            .tooltip(() -> (s, w, l, f) -> l.add(Component.translatable("tooltips.glasses.technical")
+            .tooltip(() -> (s, w, l, f) -> l.add(new TranslatableComponent("tooltips.glasses.technical")
                     .withStyle(ChatFormatting.GREEN)))
             .build())),
     GLASSES_10(sunGlasses(Artisan.GREYGOD)),
     GLASSES_11(sunGlasses(Artisan.SHOU_ZHANG, GlassesProperties.builder()
-            .tooltip(() -> (s, w, l, f) -> l.add(Component.translatable("tooltips.glasses.shades_summer")))
+            .tooltip(() -> (s, w, l, f) -> l.add(new TranslatableComponent("tooltips.glasses.shades_summer")))
             .properties(new Item.Properties().rarity(Rarity.UNCOMMON))
             .build())),
     GLASSES_12(sunGlasses(Artisan.SHOU_ZHANG, GlassesProperties.builder()
-            .tooltip(() -> (s, w, l, f) -> l.add(Component.translatable("tooltips.glasses.shades_winter")))
+            .tooltip(() -> (s, w, l, f) -> l.add(new TranslatableComponent("tooltips.glasses.shades_winter")))
             .properties(new Item.Properties().rarity(Rarity.UNCOMMON))
             .build()));
 

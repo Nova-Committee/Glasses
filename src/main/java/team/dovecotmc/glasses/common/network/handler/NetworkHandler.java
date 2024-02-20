@@ -25,7 +25,7 @@ public class NetworkHandler {
         INSTANCE.messageBuilder(GlassesUseMessage.class, nextId())
                 .encoder(GlassesUseMessage::toBytes)
                 .decoder(GlassesUseMessage::new)
-                .consumerMainThread(GlassesUseMessage::handler)
+                .consumer(GlassesUseMessage::handler)
                 .add();
     }
 }

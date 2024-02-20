@@ -3,7 +3,8 @@ package team.dovecotmc.glasses.client.event.handler;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.ClientRegistry;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -23,8 +24,13 @@ public class ModClientEventHandler {
     }
 
     @SubscribeEvent
-    public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
-        KeyBindingRef.getFunctioning().forEach(r -> event.register(r.get()));
+    public static void onStitchTexture(TextureStitchEvent.Pre event) {
+        event.addSprite(new ResourceLocation("glasses", "slot/empty_glasses_slot"));
+    }
+
+    @SubscribeEvent
+    public static void onRegisterKeyMappings(FMLClientSetupEvent event) {
+        KeyBindingRef.getFunctioning().forEach(r -> ClientRegistry.registerKeyBinding(r.get()));
     }
 
     @SubscribeEvent

@@ -1,27 +1,21 @@
-buildscript {
-    repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
-}
-
 plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
-
-apply plugin: 'org.spongepowered.mixin'
 
 group = mod_group_id
 version = mod_version
 
 base {
     archivesName = "${mod_name}-Forge-${minecraft_version}"
+}
+
+configurations {
+    shade
+    implementation.extendsFrom shade
 }
 
 java {
@@ -135,6 +129,13 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    //maven {
+    //    name "novaRepositoryReleases"
+    //    url "https://maven.nova-committee.cn/releases"
+    //}
+    flatDir {
+        dirs "libs"
+    }
 }
 
 dependencies {
@@ -143,6 +144,8 @@ dependencies {
 
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${project.curios_version}:api")
+
+    shade "committee.nova:neteasecheck:1.0.0"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -179,9 +182,22 @@ tasks.named('jar', Jar).configure {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
-
+    archiveClassifier = 'slim'
     // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
+}
+
+shadowJar {
+    archiveClassifier = ''
+    configurations = [project.configurations.shade]
+    relocate 'committee.nova.neteasecheck', 'team.dovecotmc.glasses.shaded.neteasecheck'
+    finalizedBy 'reobfShadowJar'
+}
+
+assemble.dependsOn shadowJar
+
+reobf {
+    shadowJar {}
 }
 
 tasks.withType(JavaCompile).configureEach {
