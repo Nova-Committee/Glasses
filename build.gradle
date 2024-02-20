@@ -129,12 +129,9 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
-    //maven {
-    //    name "novaRepositoryReleases"
-    //    url "https://maven.nova-committee.cn/releases"
-    //}
-    flatDir {
-        dirs "libs"
+    maven {
+        name "novaRepositoryReleases"
+        url "https://maven.nova-committee.cn/releases"
     }
 }
 
