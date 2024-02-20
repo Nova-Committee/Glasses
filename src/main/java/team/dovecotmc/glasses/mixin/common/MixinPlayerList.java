@@ -1,9 +1,10 @@
 package team.dovecotmc.glasses.mixin.common;
 
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,14 +23,14 @@ import java.util.Objects;
 @Mixin(PlayerList.class)
 public abstract class MixinPlayerList {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
-    private void inject$placeNewPlayer(Connection connection, ServerPlayer player, CallbackInfo ci) {
-        if ((Object) player instanceof ServerPlayer sp && Artisan.Cache.shouldGiveGlasses(sp.getUUID())) {
-            final Advancement adv = sp.server.getAdvancements().getAdvancement(CommonUtilities.ADV_ARTISAN);
-            final AdvancementProgress progress = sp.getAdvancements().getOrStartProgress(Objects.requireNonNull(adv));
+    private void inject$placeNewPlayer(Connection connection, ServerPlayer player, CommonListenerCookie commonListenerCookie, CallbackInfo ci) {
+        if (Artisan.Cache.shouldGiveGlasses(player.getUUID())) {
+            final AdvancementHolder adv = player.server.getAdvancements().get(CommonUtilities.ADV_ARTISAN);
+            final AdvancementProgress progress = player.getAdvancements().getOrStartProgress(Objects.requireNonNull(adv));
             if (!progress.isDone()) {
                 final Iterable<String> criteria = progress.getRemainingCriteria();
-                for (final String cr : criteria) sp.getAdvancements().award(adv, cr);
-                CommonUtilities.giveItemsToPlayer(sp, Artisan.Cache.getGlassesToGive(sp.getUUID()));
+                for (final String cr : criteria) player.getAdvancements().award(adv, cr);
+                CommonUtilities.giveItemsToPlayer(player, Artisan.Cache.getGlassesToGive(player.getUUID()));
             }
         }
         if (!Glasses.isTrinketsLoaded()) return;
