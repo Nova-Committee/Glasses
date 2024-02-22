@@ -8,7 +8,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import team.dovecotmc.glasses.common.ref.CreativeModeTabs;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -35,7 +34,7 @@ public record GlassesProperties
     }
 
     public static class Builder {
-        private Item.Properties properties = new Item.Properties().tab(CreativeModeTabs.GLASSES);
+        private Item.Properties properties = new Item.Properties();
         private Supplier<TooltipProvider> tooltipProvider = () -> (s, l, t, f) -> {
         };
         private @Nullable PacketAction packetAction = null;

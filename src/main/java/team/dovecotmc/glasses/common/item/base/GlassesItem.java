@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import team.dovecotmc.glasses.client.keybinding.KeyBindingRef;
 import team.dovecotmc.glasses.common.item.impl.SunglassesItem;
 import team.dovecotmc.glasses.common.item.properties.GlassesProperties;
+import team.dovecotmc.glasses.common.ref.CreativeModeTabs;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class GlassesItem extends Item {
     protected final Component artisan;
 
     public GlassesItem(Component artisan, GlassesProperties properties) {
-        super(properties.properties().stacksTo(1));
+        super(properties.properties().stacksTo(1).tab(CreativeModeTabs.GLASSES));
         this.artisan = artisan;
         this.properties = properties;
     }
