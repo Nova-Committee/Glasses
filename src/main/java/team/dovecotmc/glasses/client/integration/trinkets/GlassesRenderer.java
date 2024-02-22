@@ -40,6 +40,7 @@ public class GlassesRenderer implements TrinketRenderer {
     @Override
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntity> entityModel, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, LivingEntity livingEntity, float v, float v1, float v2, float v3, float v4, float v5) {
         if (!(entityModel instanceof HumanoidModel<?> humanoid)) return;
+        poseStack.pushPose();
         humanoid.getHead().copyFrom(humanoid.head);
         humanoid.getHead().translateAndRotate(poseStack);
         CustomHeadLayer.translateToHead(poseStack, false);
@@ -50,6 +51,7 @@ public class GlassesRenderer implements TrinketRenderer {
         }
         final Minecraft mc = Minecraft.getInstance();
         mc.getItemRenderer().renderStatic(stack, ItemDisplayContext.HEAD, light, OverlayTexture.NO_OVERLAY, poseStack, multiBufferSource, mc.level, 0);
+        poseStack.popPose();
     }
 
     public void modifyOffset(Consumer<DisplayOffset> modifier) {
