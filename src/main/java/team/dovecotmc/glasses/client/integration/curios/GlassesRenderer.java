@@ -42,6 +42,7 @@ public class GlassesRenderer implements ICurioRenderer {
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack poseStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!(renderLayerParent.getModel() instanceof HeadedModel headedModel)) return;
+        poseStack.pushPose();
         ICurioRenderer.followHeadRotations(slotContext.entity(), headedModel.getHead());
         headedModel.getHead().translateAndRotate(poseStack);
         CustomHeadLayer.translateToHead(poseStack, false);
@@ -52,6 +53,7 @@ public class GlassesRenderer implements ICurioRenderer {
         }
         final Minecraft mc = Minecraft.getInstance();
         mc.getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.HEAD, light, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, 0);
+        poseStack.popPose();
     }
 
     public void modifyOffset(Consumer<DisplayOffset> modifier) {
